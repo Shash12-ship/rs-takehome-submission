@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Math"
+  short_description: "Fix Markdown math that breaks on GitHub/GitLab"
+  default_prompt: "Use $gh-markdown-math to audit and fix the LaTeX math in this Markdown file so it renders correctly on GitHub, GitLab, and KaTeX previews."

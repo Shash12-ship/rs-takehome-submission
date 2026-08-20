@@ -1,0 +1,54 @@
+# Build every tracked Lean source and run the shared proof-integrity checks from
+# formalization/BUILDING.md.
+formalization-check:
+  image: debian:bookworm-slim
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  variables:
+    ELAN_HOME: "$CI_PROJECT_DIR/.elan"
+    LEAN_NUM_THREADS: "4"
+  cache:
+    key:
+      files:
+        - formalization/lean-toolchain
+    paths:
+      - .elan/
+  before_script:
+    - apt-get update
+    - apt-get install --yes --no-install-recommends build-essential ca-certificates curl git ripgrep zstd
+    - curl --proto '=https' --tlsv1.2 -fsSL -o /tmp/elan-init.sh https://elan.lean-lang.org/elan-init.sh
+    - sh /tmp/elan-init.sh -y --default-toolchain none
+    - export PATH="$ELAN_HOME/bin:$PATH"
+  script:
+    - bash artifacts/scripts/validate.sh --fetch-cache
+
+# Install the threshold-degree experiment's Python dependencies and run its
+# unit-test suite.
+experiments-check:
+  image: python:3.14-slim-bookworm
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  before_script:
+    - python -m pip install --requirement experiments/threshold-degree/requirements.txt
+  script:
+    - cd experiments/threshold-degree
+    - python -m unittest discover -s tests -v
+
+# Markdown math check (work item #2): every merge request and every push to
+# the default branch must pass the static lint + KaTeX validation of all
+# tracked Markdown files. The rules live in artifacts/scripts/check_md_math.py
+# (derived from .claude/skills/gh-markdown-math/SKILL.md). To make this a hard
+# merge gate, enable "Merge checks: Pipelines must succeed" in
+# Settings > Merge requests (maintainer only).
+
+markdown-math-check:
+  image: node:22  # Debian-based: ships both node and python3
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  script:
+    - python3 artifacts/scripts/test_check_md_math.py
+    - npm install --no-save katex
+    - git ls-files -z -- '*.md' ':!:.claude/**' | xargs -0 python3 artifacts/scripts/check_md_math.py --katex

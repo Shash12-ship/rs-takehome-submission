@@ -1,0 +1,19 @@
+*.pyc
+__pycache__/
+.DS_Store
+.claude/settings.local.json
+
+# Presentation: blog-sourced figures and LaTeX build cruft
+artifacts/intro-presentation/figures/
+artifacts/intro-presentation/qa/
+*.aux
+*.log
+*.nav
+*.snm
+*.toc
+*.out
+
+project-management/
+.gitignore
+.env
+node_modules/

@@ -1,0 +1,94 @@
+{
+  "status": "Every reported certificate is verified over the integers. A search failure is not a lower bound.",
+  "dimension": 8,
+  "target": "Hamming distance at least two between two four-bit blocks",
+  "attempts": [
+    {
+      "positive_heads": 0,
+      "best": {
+        "restart": 0,
+        "accuracy": 256,
+        "minimum_signed_score": 4.050619712595818,
+        "wrong_vertices": [],
+        "optimizer_success": true
+      }
+    }
+  ],
+  "certificate": {
+    "denominators": [
+      [
+        34,
+        -1,
+        -6,
+        -1,
+        -8,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        31,
+        -4,
+        -1,
+        -3,
+        -7,
+        -5,
+        -6,
+        -3,
+        -1
+      ],
+      [
+        32,
+        -1,
+        -1,
+        -6,
+        -1,
+        -1,
+        -6,
+        -6,
+        -4
+      ]
+    ],
+    "score_coefficients": [
+      1,
+      -476,
+      1794,
+      2403,
+      2934,
+      132,
+      1890,
+      -4130,
+      2868,
+      -661,
+      622,
+      -2333,
+      -1471,
+      188,
+      3074,
+      -2633,
+      2202,
+      208,
+      -1392,
+      -1006,
+      1501,
+      -577,
+      -1950,
+      -4044,
+      1799,
+      1406,
+      -1914,
+      2472
+    ],
+    "minimum_signed_cleared_score": 58,
+    "floating_margin": 0.31235960552584174,
+    "positive_heads": 0,
+    "orientations": [
+      -1,
+      -1,
+      -1
+    ],
+    "restart": 0,
+    "rounding_scale": 30
+  }
+}
