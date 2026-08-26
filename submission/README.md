@@ -1,7 +1,6 @@
 # Research Scientist Take-Home Submission
 
-This directory contains an exact Python verifier and the source for the accompanying
-writeup. The new result turns one exact Hamming-distance separation into an infinite
+Main Result is that I am able to turn one exact Hamming-distance separation into an infinite
 family of strict separations.
 
 ## Result
