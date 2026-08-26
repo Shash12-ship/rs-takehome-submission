@@ -1,0 +1,7 @@
+I used OpenAI Codex in ChatGPT Work mode to inspect and organize the theorem corpus,
+develop and stress-test the Part Two argument, write an exact Python verifier, and edit
+the presentation. I checked the mathematical claims against the repository proofs and
+ran the exact finite certificates and unit tests. In particular, the assistant helped
+catch and remove an invalid attempted use of partial input complementation, which is not
+a free symmetry of the model. No optimization failure or unverified model output is used
+as a lower bound.
