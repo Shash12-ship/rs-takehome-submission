@@ -26,7 +26,7 @@ version applies whenever five consecutive labels of a Hamming-distance profile a
 
 ## Local verification
 
-The verifier and its tests use only the Python standard library.
+The verifier and its tests use only the Python.
 
 ```bash
 python -m unittest discover -s submission/tests -v
@@ -38,34 +38,3 @@ python submission/verify_hamming_threshold_family.py \
 
 All classification identities and archived certificates are checked with integers.
 No training run or floating-point optimization is used as evidence.
-
-The final PDF is `output/pdf/rs_takehome_writeup.pdf`. To rebuild it:
-
-```bash
-mkdir -p output/pdf
-pdflatex -interaction=nonstopmode -halt-on-error \
-  -output-directory=output/pdf \
-  -jobname=rs_takehome_writeup submission/writeup.tex
-pdflatex -interaction=nonstopmode -halt-on-error \
-  -output-directory=output/pdf \
-  -jobname=rs_takehome_writeup submission/writeup.tex
-```
-
-## DeltaAI
-
-Submit the included CPU verification job from the repository root:
-
-```bash
-mkdir -p submission/results
-sbatch submission/run_verify.slurm
-squeue -u "$USER" -n rs-hdth-verify
-```
-
-After completion:
-
-```bash
-rg -n "passed|all exact finite checks passed" submission/results
-```
-
-If the project allocation or partition differs, edit only the two corresponding
-`#SBATCH` lines in `run_verify.slurm`.
